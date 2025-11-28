@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Structured Web App</title>
+    <!-- Added typography plugin -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <style>
+      /* Define CSS Variables for Theming */
+      :root {
+        /* MD3 Light Blue Based Palette (Day/Sakura) - RGB values for Tailwind opacity support */
+        --color-primary: 0 100 147;          /* #006493 */
+        --color-on-primary: 255 255 255;     /* #ffffff */
+        --color-primary-container: 202 230 255; /* #cae6ff */
+        --color-on-primary-container: 0 30 48; /* #001e30 */
+
+        --color-secondary: 80 96 110;        /* #50606e */
+        --color-on-secondary: 255 255 255;
+        --color-secondary-container: 211 228 246; /* #d3e4f6 */
+        --color-on-secondary-container: 12 29 41; /* #0c1d29 */
+
+        --color-tertiary: 101 88 123;        /* #65587b */
+        --color-on-tertiary: 255 255 255;
+        --color-tertiary-container: 236 220 255; /* #ecdcff */
+        --color-on-tertiary-container: 33 22 52; /* #211634 */
+
+        --color-background: 252 252 255;     /* #fcfcff */
+        --color-on-background: 26 28 30;     /* #1a1c1e */
+
+        --color-surface: 249 249 252;        /* #f9f9fc */
+        --color-surface-bright: 255 255 255; /* #ffffff - Pure white for glass effect base in light mode */
+        --color-on-surface: 26 28 30;        /* #1a1c1e */
+        --color-surface-variant: 221 227 234; /* #dde3ea */
+        --color-on-surface-variant: 65 71 77; /* #41474d */
+        --color-surface-container: 236 238 242; /* #eceef2 */
+
+        --color-outline: 113 120 125;        /* #71787d */
+        --color-outline-variant: 193 199 206; /* #c1c7ce */
+      }
+
+      /* Dark Mode (Night/Rain) - Slightly Darker, Slate/Blue Tones */
+      .dark {
+        --color-primary: 154 206 255;        /* Brighter Blue for better contrast on dark */
+        --color-on-primary: 0 50 80;
+        --color-primary-container: 0 75 115;
+        --color-on-primary-container: 215 235 255; /* Brighter container text */
+
+        --color-secondary: 183 200 219;
+        --color-on-secondary: 35 50 64;
+        --color-secondary-container: 58 72 86;
+        --color-on-secondary-container: 225 240 255;
+
+        --color-tertiary: 220 200 255;
+        --color-on-tertiary: 56 43 78;
+        --color-tertiary-container: 78 64 100;
+        --color-on-tertiary-container: 245 235 255;
+
+        --color-background: 10 15 30;        /* Darker Slate - Night Sky */
+        --color-on-background: 240 240 245;  /* Almost White */
+
+        --color-surface: 20 25 40;           /* Dark Glass Base */
+        --color-surface-bright: 30 41 59;    /* Slate 800 - Card Backgrounds */
+        --color-on-surface: 250 250 250;     /* Pure White text */
+        --color-surface-variant: 67 71 78;
+        --color-on-surface-variant: 210 215 225; /* High contrast grey for secondary text */
+        --color-surface-container: 25 35 50; 
+
+        --color-outline: 160 170 180;
+        --color-outline-variant: 80 90 100;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        darkMode: 'class', // Enable class-based dark mode
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
+                on: 'rgb(var(--color-on-primary) / <alpha-value>)',
+                container: 'rgb(var(--color-primary-container) / <alpha-value>)',
+                onContainer: 'rgb(var(--color-on-primary-container) / <alpha-value>)',
+              },
+              secondary: {
+                DEFAULT: 'rgb(var(--color-secondary) / <alpha-value>)',
+                on: 'rgb(var(--color-on-secondary) / <alpha-value>)',
+                container: 'rgb(var(--color-secondary-container) / <alpha-value>)',
+                onContainer: 'rgb(var(--color-on-secondary-container) / <alpha-value>)',
+              },
+              tertiary: {
+                DEFAULT: 'rgb(var(--color-tertiary) / <alpha-value>)',
+                on: 'rgb(var(--color-on-tertiary) / <alpha-value>)',
+                container: 'rgb(var(--color-tertiary-container) / <alpha-value>)',
+                onContainer: 'rgb(var(--color-on-tertiary-container) / <alpha-value>)',
+              },
+              background: 'rgb(var(--color-background) / <alpha-value>)',
+              onBackground: 'rgb(var(--color-on-background) / <alpha-value>)',
+              surface: {
+                DEFAULT: 'rgb(var(--color-surface) / <alpha-value>)',
+                on: 'rgb(var(--color-on-surface) / <alpha-value>)',
+                variant: 'rgb(var(--color-surface-variant) / <alpha-value>)',
+                onVariant: 'rgb(var(--color-on-surface-variant) / <alpha-value>)',
+                container: 'rgb(var(--color-surface-container) / <alpha-value>)',
+                bright: 'rgb(var(--color-surface-bright) / <alpha-value>)',
+              },
+              outline: {
+                DEFAULT: 'rgb(var(--color-outline) / <alpha-value>)',
+                variant: 'rgb(var(--color-outline-variant) / <alpha-value>)',
+              }
+            },
+            fontFamily: {
+              sans: ['system-ui', 'sans-serif'],
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-out',
+              'fade-in-down': 'fadeInDown 0.3s ease-out',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              fadeInDown: {
+                '0%': { opacity: '0', transform: 'translateY(-10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+            }
+          }
+        }
+      }
+    </script>
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://aistudiocdn.com/react@^19.2.0",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+        "react/": "https://aistudiocdn.com/react@^19.2.0/"
+      }
+    }
+    </script>
+  </head>
+  <body class="bg-background text-onBackground antialiased selection:bg-primary-container selection:text-primary-onContainer transition-colors duration-500">
+    <div id="root"></div>
+  </body>
+</html>

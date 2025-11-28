@@ -1,0 +1,5 @@
+{
+  "name": "React-Based Structured App",
+  "description": "A structured React application organized with Layouts, Pages, and Components directories to mimic a clean architecture.",
+  "requestFramePermissions": []
+}
